@@ -10,6 +10,7 @@ namespace quest11._4
     {
         static void Main(string[] args)
         {
+
         }
     }
 }

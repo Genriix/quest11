@@ -4,11 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace quest11._3
+namespace test
 {
-    public class Employee
+    class Employee
     {
-        DateTime dateOfHire;
+        DateTime dateOfHire; // Свойство для хранения типа данных время
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Post { get; set; }
+        public DateTime DateOfHire
+        {
+            get { return dateOfHire; }
+            set { dateOfHire = value; }
+        } // Поле реализации свойства время
+
+        public Employee(string name, string surname, string post, string set_DateOfHire)
+        {
+            FirstName = name;
+            LastName = surname;
+            Post = post;
+            dateOfHire = DateTime.Parse(set_DateOfHire);
+        }
+
+
+
+
+
         double salary;
 
         public enum Position
@@ -17,27 +39,6 @@ namespace quest11._3
             Manager = 100000,
             Boss = 1000000
         }
-
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public int Post {  get; set; }
-        public DateTime DateOfHire
-        {
-            get { return dateOfHire; }
-            set { dateOfHire = value; }
-        }
-
-        public Employee(string name, string surname, int post, string set_DateOfHire)
-        {
-            Name = name;
-            Surname = surname;
-            dateOfHire = DateTime.Parse(set_DateOfHire);
-            Post = post;
-            if (post == 3) { Calculation(Employee.Position.Worker); }
-            else if (post == 2) { Calculation(Employee.Position.Manager); }
-            else if (post == 1) { Calculation(Employee.Position.Boss); }
-        }
-
         public double DiscoverGrade(DateTime dateOfHire)
         /// метод, который определяет повышающий коэффициент в зависимости от стажа в днях\\\
         {
@@ -65,30 +66,34 @@ namespace quest11._3
                 default:
                     Console.WriteLine("No such position!");
                     break;
+
             }
             return 0.0;
         }
+
+
+
+
+
+
+
         public void Show()
         {
-            Console.WriteLine(
-                $"Имя:                   {Name}\n" +
-                $"Фамилия:               {Surname}\n" +
-                $"Дата приёма на работу: {DateOfHire.ToShortDateString()}\n" +
-                $"Оклад:                 {salary}\n" +
-                $"Налоговый сбор:        {salary * 0.34}\n" +
-                $"Должность:             {Post}");
+            Console.WriteLine($"" +
+                $"Имя:                              {FirstName}\n" +
+                $"Фамилия:                          {LastName}\n" +
+                $"Должность:                        {Post}\n" +
+                $"Дата приёма на текущую должность: {DateOfHire.ToShortDateString()}\n");
         }
     }
     internal class Program
     {
         static void Main()
         {
-            /// Boss = 1 Manager = 2 Worker = 3 
-            /// Дата типа "День.Месяц.Год"
-            Employee one = new Employee("Ильин", "Владислав", 2, "29.08.2021"); 
-            one.Show();
-            
-            Console.ReadKey();
+            Employee employee = new Employee("Владислав", "Ильин", "Типа босс", "29.08.2021");
+            employee.Show();
+
+            Console.ReadLine();
         }
     }
 }

@@ -20,22 +20,22 @@ namespace quest11._3
 
         public string Name { get; set; }
         public string Surname { get; set; }
-        public int Post {  get; set; }
+        public string Post {  get; set; }
         public DateTime DateOfHire
         {
             get { return dateOfHire; }
             set { dateOfHire = value; }
         }
 
-        public Employee(string name, string surname, int post, string set_DateOfHire)
+        public Employee(string name, string surname, string post, string set_DateOfHire)
         {
             Name = name;
             Surname = surname;
             dateOfHire = DateTime.Parse(set_DateOfHire);
             Post = post;
-            if (post == 3) { Calculation(Employee.Position.Worker); }
-            else if (post == 2) { Calculation(Employee.Position.Manager); }
-            else if (post == 1) { Calculation(Employee.Position.Boss); }
+            if (post == "3") { Calculation(Employee.Position.Worker); }
+            else if (post == "2") { Calculation(Employee.Position.Manager); }
+            else if (post == "1") { Calculation(Employee.Position.Boss); }
         }
 
         public double DiscoverGrade(DateTime dateOfHire)
@@ -55,12 +55,15 @@ namespace quest11._3
             {
                 case Position.Worker:
                     salary = 10000 * grade;
+                    Post = "Worker";
                     return salary;
                 case Position.Manager:
                     salary = 100000 * grade;
+                    Post = "Manager";
                     return salary;
                 case Position.Boss:
                     salary = 1000000 * grade;
+                    Post = "Boss";
                     return salary;
                 default:
                     Console.WriteLine("No such position!");
@@ -76,7 +79,7 @@ namespace quest11._3
                 $"Дата приёма на работу: {DateOfHire.ToShortDateString()}\n" +
                 $"Оклад:                 {salary}\n" +
                 $"Налоговый сбор:        {salary * 0.34}\n" +
-                $"Должность:             {Post}");
+                $"Должность:             {Post}\n");
         }
     }
     internal class Program
@@ -85,9 +88,15 @@ namespace quest11._3
         {
             /// Boss = 1 Manager = 2 Worker = 3 
             /// Дата типа "День.Месяц.Год"
-            Employee one = new Employee("Ильин", "Владислав", 2, "29.08.2021"); 
+            Employee one = new Employee("Ильин", "Владислав", "2", "29.08.2023");
+            Employee ded = new Employee("Андрей", "Каличев", "3", "14.02.1998");
+            Employee theBestOfTrainer = new Employee("Данил", "Егоров", "1", "01.09.2015");
             one.Show();
-            
+            ded.Show();
+            theBestOfTrainer.Show();
+
+            new Employee("Имя", "Фамилия", "1", "01.01.2001").Show();
+
             Console.ReadKey();
         }
     }
